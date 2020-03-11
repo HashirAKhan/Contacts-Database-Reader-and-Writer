@@ -1,4 +1,6 @@
-#include "DataBase.hpp"
+#include "ContactApplication.hpp"
+
+
 
 int main(){
   // PhoneNumber x = PhoneNumber(1111111111,"Home");
@@ -8,8 +10,10 @@ int main(){
   // Contact b = Contact("Rachel", "Tieu");
   // std::cout<<a;
   // std::cout<<b;
-  std::map<std::string, Contact> Contact_list;
-  DataBase db = DataBase(Contact_list, "database.txt");
+  ContactApplication application = ContactApplication();
+  application.print();
+  Contact temp = Contact("Rachel", "Tieu", PhoneNumber("1939492939", "Home"));
+  //db.addContact(temp);
 
   return 0;
 }

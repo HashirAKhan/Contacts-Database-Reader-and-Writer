@@ -73,6 +73,10 @@ class PhoneNumber{
       return number_;
     }
 
+    std::string getType(){
+      return type_;
+    }
+
     friend std::ostream &operator<<(std::ostream &out, const PhoneNumber &phone_number);
 
 };
