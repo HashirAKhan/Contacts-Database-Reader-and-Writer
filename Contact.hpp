@@ -3,6 +3,7 @@
 
 #include "PhoneNumber.hpp"
 #include <vector>
+#include <iterator>
 
 class Contact{
   private:
@@ -21,21 +22,21 @@ class Contact{
     Contact(std::string first_name, std::string last_name){
       first_name_ = first_name;
       last_name_ = last_name;
-      full_name_ = first_name_ + last_name_;
+      full_name_ = first_name_ + ' ' + last_name_;
     }
 
     Contact(std::string first_name, std::string last_name, PhoneNumber phone_number){
       first_name_ = first_name;
       last_name_ = last_name;
       phone_numbers_.push_back(phone_number);
-      full_name_ = first_name_ + last_name_;
+      full_name_ = first_name_ + ' ' + last_name_;
     }
 
     Contact(std::string first_name, std::string last_name, std::vector<PhoneNumber> phone_number){
       first_name_ = first_name;
       last_name_ = last_name;
       phone_numbers_ = phone_number;
-      full_name_ = first_name_ + last_name_;
+      full_name_ = first_name_ + ' ' +last_name_;
     }
 
     bool addNumber(PhoneNumber phone_number){
@@ -62,6 +63,16 @@ class Contact{
 
     std::string getFullName(){
       return full_name_;
+    }
+
+    bool removeNumber(PhoneNumber number){
+      for(std::vector<PhoneNumber>::iterator i = phone_numbers_.begin(); i != phone_numbers_.end(); i++){
+        if(number.getNumber() == i->getNumber()){
+          phone_numbers_.erase(i);
+          return true;
+        }
+      }
+      return false;
     }
 
     friend std::ostream &operator<<(std::ostream &out, const Contact &contact);

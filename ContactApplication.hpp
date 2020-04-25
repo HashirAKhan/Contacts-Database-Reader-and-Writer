@@ -8,6 +8,17 @@ class ContactApplication{
     std::list<Contact> contact_list_;
     DataBase database_;
 
+    bool removeNumber(PhoneNumber number){
+      for(std::list<Contact>::iterator i = contact_list_.begin(); i != contact_list_.end(); i++){
+        if(i->removeNumber(number)){
+        //  Database.removeNumber(number);
+          return true;
+        }
+      }
+      return true;
+
+    }
+
   public:
     ContactApplication(){
       database_ = DataBase();
@@ -16,6 +27,9 @@ class ContactApplication{
 
     void print(){
       std::cout<<*this;
+    }
+    bool removeNum(std::string str){
+      return removeNumber(PhoneNumber(str, ""));
     }
 
     friend std::ostream &operator<<(std::ostream &out, const ContactApplication &contact_application);
