@@ -11,7 +11,7 @@ class ContactApplication{
     bool removeNumber(PhoneNumber number){
       for(std::list<Contact>::iterator i = contact_list_.begin(); i != contact_list_.end(); i++){
         if(i->removeNumber(number)){
-        //  Database.removeNumber(number);
+          database_.removeNumber(number);
           return true;
         }
       }
