@@ -19,6 +19,17 @@ class ContactApplication{
 
     }
 
+    bool removeContact(std::string name){
+      for(std::list<Contact>::iterator i = contact_list_.begin(); i != contact_list_.end(); i++){
+        if(i->getFullName() == name){
+          database_.removeContact(name);
+          contact_list_.erase(i);
+          return true;
+        }
+      }
+      return true;
+    }
+
   public:
     ContactApplication(){
       database_ = DataBase();
@@ -30,6 +41,10 @@ class ContactApplication{
     }
     bool removeNum(std::string str){
       return removeNumber(PhoneNumber(str, ""));
+    }
+
+    bool removeCont(std::string name){
+      return removeContact(name);
     }
 
     friend std::ostream &operator<<(std::ostream &out, const ContactApplication &contact_application);
