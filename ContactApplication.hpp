@@ -30,6 +30,29 @@ class ContactApplication{
       return true;
     }
 
+
+    bool addContact(Contact contact){
+      std::list<Contact>::iterator it;
+      for(it = contact_list_.begin(); it != contact_list_.end(); it++){
+        if(it->getFullName() == contact.getFullName()){
+          return it->addNumber(contact.getPhoneNumbers()[0]);
+        }
+        if(it->getFullName()>contact.getFullName()){
+          break;
+        }
+      }
+      contact_list_.insert(it, contact);
+      return true;
+    }
+
+    bool addNumber (Contact contact){
+      if(addContact(contact)){
+        database_.addNumber(contact);
+        return true;
+      }
+      return false;
+    }
+
   public:
     ContactApplication(){
       database_ = DataBase();
@@ -46,6 +69,11 @@ class ContactApplication{
     bool removeCont(std::string name){
       return removeContact(name);
     }
+
+    bool addnum(Contact number){
+      return addNumber(number);
+    }
+
 
     friend std::ostream &operator<<(std::ostream &out, const ContactApplication &contact_application);
 

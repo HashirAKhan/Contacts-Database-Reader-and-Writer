@@ -14,9 +14,10 @@ int main(){
   application.print();
   //Contact temp = Contact("Rachel", "Tieu", PhoneNumber("1939492939", "Home"));
   //db.addContact(temp);
-  // application.removeNum("4920483723");
+  //application.removeNum("4920483433");
   // application.print();
-  application.removeCont("Hashir Khan");
+  //application.removeCont("Hashir Khan");
+  application.addnum(Contact("Andy", "Mina", PhoneNumber("493035830","Home")));
   application.print();
   return 0;
 }
