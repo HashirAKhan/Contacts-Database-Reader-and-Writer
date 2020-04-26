@@ -53,25 +53,39 @@ class ContactApplication{
       return false;
     }
 
+    bool checkNum(std::string input, int options){
+      int num = stoi(input);
+      return (num < options && num > 0);
+    }
+
+    void mainMenu(){
+      bool run = true;
+
+      while(run){
+        std::cout<<"Contact Application\n";
+        std::cout<<"\t1. Show Contact List\n";
+        std::cout<<"\t2. Add Contact or Number";
+        std::cout<<"\t3. Delete Contact or Number"\n;
+        std::cout<<"\t4. Exit Application"\n\n;
+        std::string input;
+        do{
+          std::cout<<"\tPlease select and option(1-4): ";
+          cin>>input;
+        } while (validnum(input,4));
+
+
+      }
+    }
+
   public:
     ContactApplication(){
       database_ = DataBase();
       database_.FileToList(contact_list_);
     }
 
-    void print(){
-      std::cout<<*this;
-    }
-    bool removeNum(std::string str){
-      return removeNumber(PhoneNumber(str, ""));
-    }
-
-    bool removeCont(std::string name){
-      return removeContact(name);
-    }
-
-    bool addnum(Contact number){
-      return addNumber(number);
+    void run(){
+      system("clear");
+      mainMenu();
     }
 
 
