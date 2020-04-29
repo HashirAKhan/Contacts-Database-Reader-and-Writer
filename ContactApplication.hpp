@@ -107,8 +107,9 @@ class ContactApplication{
       return true;
     }
 
-    addPhoneNumberMenu(std::string first_name, std::string last_name){
+    void addPhoneNumberMenu(std::string first_name, std::string last_name){
       std::string number;
+      std::string type
       system("clear");
       do{
         std::cout<<"Please Enter The Phone Number You Are Adding To This Contact ";
@@ -116,16 +117,39 @@ class ContactApplication{
       } while(!validNumber(number))
 
       std::string input;
+      system("clear");
       std::cout<<"What Type Of Phone Number Is This\n";
       std::cout<<"\t1. Home\n";
       std::cout<<"\t2. Mobil\n";
-      std::cout<<"\t3. Word\n\n";
+      std::cout<<"\t3. Work\n\n";
       do{
         std::cout<<"\tPlease select an option(1-3): ";
-        CONTINUE WORKING HERE
+        std::cin>>input;
+      }while(!checkNum(input, "3"));
+
+      if(input == "1"){
+        type = "Home";
+      }
+      else if(input == "2"){
+        type = "Mobil";
+      }
+      else if(input == "3"){
+        type = "Work";
       }
 
-      Contact(first_name, last_name, number);
+      Contact temp = Contact(first_name, last_name, PhoneNumber(number, type));
+      system("clear")
+      std::string temp;
+      if(addContact(temp)){
+        std::cout<<"Contact Was Added Successfully!\nPress Enter To Return To Main Menu";
+        std::cin>>temp;
+        return;
+      }
+      else{
+        std::cout<<"Number Already Exist For This Contact\nPress Enter To Return To Main Menu";
+        std::cin>>temp;
+        return;
+      }
     }
 
     void addContactMenu(){
@@ -150,6 +174,25 @@ class ContactApplication{
 
     }
 
+    void selectContact(){
+      system("clear");
+      int num = 0;
+      std::list<Contact>::iterator it;
+      for(it = contact_list_.begin(); i != contact_list_.end(); it++){
+        num++;
+        std::cout<<"\t"<<num<<". "<<it->getFullName()<<"\n";
+      }
+      std::cout<<"\n";
+      std::string input;
+      do{
+        std::cout<<"Please select a Contact(1-"<<num<<"): ";
+      }while(checkNum(!input, std::to_string(num)));
+
+      it = contact_list_.begin();
+      std::advance(it, num-1);
+      addPhoneNumberMenu(it->getFirstName(), it->getLastName());
+    }
+
     newContactorNumberMenu(){
       system("clear");
       std::string input;
@@ -162,6 +205,12 @@ class ContactApplication{
       } while(!checkNum(input, "3"));
       if(input == "1"){
         addContactMenu();
+      }
+      else if(input == "2"){
+        selectContact();
+      }
+      else if(input == "3"){
+        return;
       }
     }
 
