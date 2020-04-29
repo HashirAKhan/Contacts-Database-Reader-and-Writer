@@ -65,9 +65,12 @@ class Contact{
       return full_name_;
     }
 
-    bool removeNumber(PhoneNumber number){
+    bool removeNumber(Contact number){
+      if(number.getFullName()!= full_name_){
+        return false;
+      }
       for(std::vector<PhoneNumber>::iterator i = phone_numbers_.begin(); i != phone_numbers_.end(); i++){
-        if(number.getNumber() == i->getNumber()){
+        if(number.getPhoneNumbers()[0].getNumber() == i->getNumber()){
           phone_numbers_.erase(i);
           return true;
         }

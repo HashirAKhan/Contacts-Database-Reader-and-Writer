@@ -36,7 +36,15 @@ class DataBase{
       data.close();
     }
 
-    bool removeNumber(PhoneNumber number){
+    void reset(){
+      std::ofstream out("outfile.txt");
+      out.close();
+      std::remove("database.txt");
+      std::rename("outfile.txt","database.txt");
+    }
+
+
+    bool removeNumber(Contact number){
       bool del = false;
       std::string line;
       // open input file
@@ -49,18 +57,23 @@ class DataBase{
       while( getline(in,line) )
       {
         std::stringstream contact_string(line);
+        std::string name;
         std::string phone;
-        getline(contact_string, phone, ';');
+        getline(contact_string, name, ';');
         getline(contact_string, phone, '/');
-        if(stol(phone) != number.getNumber())
+        if(stol(phone) != number.getPhoneNumbers()[0].getNumber())
           out << line << "\n";
-        else
+        else if(name != number.getFullName()){
+          out << line << "\n";
+        }
+        else{
           del = true;
+        }
       }
       in.close();
       out.close();
       // delete the original file
-      std::remove("infile.txt");
+      std::remove("database.txt");
       // rename old to new
       std::rename("outfile.txt","database.txt");
       return del;
